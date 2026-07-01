@@ -1,12 +1,54 @@
 # Ignore compiled Python files
 *.pyc
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
 # Ignore log files
 *.log
+*.pot
+
 # Ignore specific directories
 data/
 results/
-plot_results/
+simulation_result/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.coverage
+.cache
 # Ignore specific files
 config.ini
 Data_RRO.txt
 .DS_Store
+simulation_result/res1.pkl
+simulation_result/res2.pkl
+simulation_result/res3.pkl
+simulation_result/res4.pkl
+simulation_result/res5.pkl
+simulation_result/res6.pkl
+simulation_result/res7.pkl
+simulation_result/res8.pkl
+simulation_result/res9.pkl
+
+
+models/
+
+analysis_outputs/
+
+analyze_notch_solution.py
+config.py
+NOTCH_DESIGNER_V2.md
+simple_rl_notch_designer_peak.py
+simple_rl_notch_designer_usage.md
+simple_rl_notch_designer_v2.py
+test_simple_rl_notch_designer.py
+simple_rl_notch_designer.py
+rl_notch_designer.py
+
+

@@ -300,137 +300,67 @@ Fr_L = Fr_L_vcm_all + Fr_L_pzt_all
 Fr_S = 1. / (1 + Fr_L)
 # Plot the Frequency Response of the system 
 
-
 # Fr_Pc_vcm_all
-
 save_path = './plot_result_ReducedOrder/figure9_The_Frequency_Response_of_Pc_vcm.png'
-title = 'The Frequency Response of Pc_vcm' 
+title = 'The Frequency Response of $Pc_{vcm}$ (Reduced Order)' 
 Fr_Pc_vcm_all_mag_reduced = 20*np.log10(abs(Fr_Pc_vcm_all_reduce).T)
 Fr_Pc_vcm_all_phase_reduced = 180*(np.angle(Fr_Pc_vcm_all_reduce).T)/np.pi - 180
-Fr_Pc_vcm_all_mag = 20*np.log10(abs(Fr_Pc_vcm_all).T)
-Fr_Pc_vcm_all_phase = 180*(np.angle(Fr_Pc_vcm_all).T)/np.pi - 180
-Freq_Resp_Plot_Compare(Fr_Pc_vcm_all_mag_reduced, 
-                       Fr_Pc_vcm_all_phase_reduced, 
-                       Fr_Pc_vcm_all_mag, 
-                       Fr_Pc_vcm_all_phase, f, title, (-360,0), save_path)
-
+Freq_Resp_Plot(Fr_Pc_vcm_all_mag_reduced, Fr_Pc_vcm_all_phase_reduced, f, title, (-360,0), save_path)
 
 # Fr_Pc_pzt_all
-
 save_path = './plot_result_ReducedOrder/figure10_The_Frequency_Response_of_Pc_pzt.png'
-title = 'The Frequency Response of Pc_pzt'
+title = 'The Frequency Response of $Pc_{pzt}$ (Reduced Order)'
 Fr_Pc_pzt_all_mag_reduce = 20*np.log10(abs(Fr_Pc_pzt_all_reduce).T)
 Fr_Pc_pzt_all_phase_reduce = 180*(np.angle(Fr_Pc_pzt_all_reduce).T)/np.pi 
-Fr_Pc_pzt_all_mag = 20*np.log10(abs(Fr_Pc_pzt_all).T)
-Fr_Pc_pzt_all_phase = 180*(np.angle(Fr_Pc_pzt_all).T)/np.pi
-Freq_Resp_Plot_Compare(Fr_Pc_pzt_all_mag_reduce, 
-                       Fr_Pc_pzt_all_phase_reduce, 
-                       Fr_Pc_pzt_all_mag, 
-                       Fr_Pc_pzt_all_phase, f, title, (-180,180), save_path)
-
+Freq_Resp_Plot(Fr_Pc_pzt_all_mag_reduce, Fr_Pc_pzt_all_phase_reduce, f, title, (-180,180), save_path)
 
 # Multi_Rate_Filter
-
 save_path = './plot_result_ReducedOrder/figure11_Multi-rate_filter.png'
 Fr_Fm_vcm_mag_reduce = 20*np.log10(abs(Fr_Fm_vcm_reduce))
 Fr_Fm_vcm_phase_reduce = 180*(np.angle(Fr_Fm_vcm_reduce))/np.pi
-
 Fr_Fm_pzt_mag_reduce = 20*np.log10(abs(Fr_Fm_pzt_reduce))
 Fr_Fm_pzt_phase_reduce = 180*(np.angle(Fr_Fm_pzt_reduce))/np.pi
-
-Fr_Fm_vcm_mag = 20*np.log10(abs(Fr_Fm_vcm))
-Fr_Fm_vcm_phase = 180*(np.angle(Fr_Fm_vcm))/np.pi
-
-Fr_Fm_pzt_mag = 20*np.log10(abs(Fr_Fm_pzt))
-Fr_Fm_pzt_phase = 180*(np.angle(Fr_Fm_pzt))/np.pi
-Multi_Rate_Filter_Plot_Compare(Fr_Fm_vcm_mag_reduce, 
-                       Fr_Fm_vcm_phase_reduce, 
-                       Fr_Fm_pzt_mag_reduce, 
-                       Fr_Fm_pzt_phase_reduce, 
-                       Fr_Fm_vcm_mag, 
-                       Fr_Fm_vcm_phase, 
-                       Fr_Fm_pzt_mag, 
-                       Fr_Fm_pzt_phase, 
-                       f, 'Multi-rate filter', save_path)
-
+Multi_Rate_Filter_Plot(Fr_Fm_vcm_mag_reduce, Fr_Fm_vcm_phase_reduce, 
+                      Fr_Fm_pzt_mag_reduce, Fr_Fm_pzt_phase_reduce, 
+                      f, 'Multi-rate Filter (Reduced Order)', save_path)
 
 # Fr_Pd_vcm_all
-
 save_path = './plot_result_ReducedOrder/figure12_The_Frequency_Response_of_Pd_vcm.png'
-title = 'The Frequency Response of Pd_vcm'
+title = 'The Frequency Response of $Pd_{vcm}$ (Reduced Order)'
 Fr_Pd_vcm_all_mag_reduce = 20*np.log10(abs(Fr_Pd_vcm_all_reduce).T)
 Fr_Pd_vcm_all_phase_reduce = 180*(np.angle(Fr_Pd_vcm_all_reduce).T)/np.pi - 180 
-Fr_Pd_vcm_all_mag = 20*np.log10(abs(Fr_Pd_vcm_all).T)
-Fr_Pd_vcm_all_phase = 180*(np.angle(Fr_Pd_vcm_all).T)/np.pi - 180
-Freq_Resp_Plot_Compare(Fr_Pd_vcm_all_mag_reduce, 
-                       Fr_Pd_vcm_all_phase_reduce, 
-                       Fr_Pd_vcm_all_mag, 
-                       Fr_Pd_vcm_all_phase, 
-                       f, title, (-360,90), save_path)
-
+Freq_Resp_Plot(Fr_Pd_vcm_all_mag_reduce, Fr_Pd_vcm_all_phase_reduce, f, title, (-360,90), save_path)
 
 # Fr_Pd_pzt_all
-
 save_path = './plot_result_ReducedOrder/figure13_The_Frequency_Response_of_Pd_pzt.png'
-title = 'The Frequency Response of Pd_pzt'
+title = 'The Frequency Response of $Pd_{pzt}$ (Reduced Order)'
 Fr_Pd_pzt_all_mag_reduce = 20*np.log10(abs(Fr_Pd_pzt_all_reduce).T)
 Fr_Pd_pzt_all_phase_reduce = 180*(np.angle(Fr_Pd_pzt_all_reduce).T)/np.pi 
-Fr_Pd_pzt_all_mag = 20*np.log10(abs(Fr_Pd_pzt_all).T)
-Fr_Pd_pzt_all_phase = 180*(np.angle(Fr_Pd_pzt_all).T)/np.pi
-Freq_Resp_Plot_Compare(Fr_Pd_pzt_all_mag_reduce, 
-               Fr_Pd_pzt_all_phase_reduce, 
-               Fr_Pd_pzt_all_mag, 
-               Fr_Pd_pzt_all_phase, 
-               f, title, (-180,180), save_path)
-
+Freq_Resp_Plot(Fr_Pd_pzt_all_mag_reduce, Fr_Pd_pzt_all_phase_reduce, f, title, (-180,180), save_path)
 
 # Fr_Cd_vcm
-
 save_path = './plot_result_ReducedOrder/figure14_The_Frequency_Response_of_Cd_vcm.png'
-title = 'The Frequency Response of Cd_vcm'
+title = 'The Frequency Response of $Cd_{vcm}$ (Reduced Order)'
 Fr_Cd_vcm_mag_reduce = 20*np.log10(abs(Fr_Cd_vcm_reduce).T)
 Fr_Cd_vcm_phase_reduce = 180*(np.angle(Fr_Cd_vcm_reduce).T)/np.pi 
-Fr_Cd_vcm_mag = 20*np.log10(abs(Fr_Cd_vcm).T)
-Fr_Cd_vcm_phase = 180*(np.angle(Fr_Cd_vcm).T)/np.pi
-Freq_Resp_Plot_Compare(Fr_Cd_vcm_mag_reduce, 
-                       Fr_Cd_vcm_phase_reduce, 
-                       Fr_Cd_vcm_mag, 
-                       Fr_Cd_vcm_phase, 
-                       f, title, (-180, 180), save_path)
-
+Freq_Resp_Plot(Fr_Cd_vcm_mag_reduce, Fr_Cd_vcm_phase_reduce, f, title, (-180, 180), save_path)
 
 # Fr_Cd_pzt
-
-save_path = './plot_result_ReducedOrder/figure15_The_Frequency_Response_of_Cd_vcm.png'
-title = 'The Frequency Response of Cd_vcm' 
+save_path = './plot_result_ReducedOrder/figure15_The_Frequency_Response_of_Cd_pzt.png'
+title = 'The Frequency Response of $Cd_{pzt}$ (Reduced Order)'
 Fr_Cd_pzt_mag_reduce = 20*np.log10(abs(Fr_Cd_pzt_reduce).T)
 Fr_Cd_pzt_phase_reduce = 180*(np.angle(Fr_Cd_pzt_reduce).T)/np.pi
-Fr_Cd_pzt_mag = 20*np.log10(abs(Fr_Cd_pzt).T)
-Fr_Cd_pzt_phase = 180*(np.angle(Fr_Cd_pzt).T)/np.pi
-Freq_Resp_Plot_Compare(Fr_Cd_pzt_mag_reduce, 
-                       Fr_Cd_pzt_phase_reduce,
-                       Fr_Cd_pzt_mag, 
-                       Fr_Cd_pzt_phase, 
-                       f, title, (-180, 180), save_path)
-
+Freq_Resp_Plot(Fr_Cd_pzt_mag_reduce, Fr_Cd_pzt_phase_reduce, f, title, (-180, 180), save_path)
 
 # Fr_L
-
 save_path = './plot_result_ReducedOrder/figure16_Openloop(Bode Plot).png'
-title = 'Openloop (Bode Plot)' 
+title = 'Openloop (Bode Plot, Reduced Order)' 
 Fr_L_mag_reduce = 20*np.log10(abs(Fr_L_reduce).T)
 Fr_L_phase_reduce = np.mod(180*(np.angle(Fr_L_reduce).T)/np.pi + 360, 360) - 360
-Fr_L_mag = 20*np.log10(abs(Fr_L).T)
-Fr_L_phase = np.mod(180*(np.angle(Fr_L).T)/np.pi + 360, 360) - 360
-Freq_Resp_Plot_Compare(Fr_L_mag_reduce, 
-               Fr_L_phase_reduce,
-               Fr_L_mag, 
-               Fr_L_phase, 
-               f, title, (-360,0), save_path)
-
+Freq_Resp_Plot(Fr_L_mag_reduce, Fr_L_phase_reduce, f, title, (-360,0), save_path)
 
 # Fr_L Nyquist Plot
-title = 'Openloop(Nyquist Plot)' 
+title = 'Openloop (Nyquist Plot, Reduced Order)' 
 save_path = './plot_result_ReducedOrder/figure17_Openloop(Nyquist Plot).png'
 for i in range(f.shape[0]):
     if f[i] > 1/Ts/2:
@@ -438,25 +368,12 @@ for i in range(f.shape[0]):
         break 
 Fr_L_real_reduce = np.real(((Fr_L_reduce).T)[:, :index]).tolist()
 Fr_L_imag_reduce = np.imag(((Fr_L_reduce).T)[:, :index]).tolist()
-Fr_L_real = np.real(((Fr_L).T)[:, :index]).tolist()
-Fr_L_imag = np.imag(((Fr_L).T)[:, :index]).tolist()
-Nyquist_Plot_Compare(Fr_L_real_reduce, 
-                     Fr_L_imag_reduce, 
-                     Fr_L_real, 
-                     Fr_L_imag,
-                     title, 
-                     save_path)
+Nyquist_Plot(Fr_L_real_reduce, Fr_L_imag_reduce, title, save_path)
 
-
-# Fr_Pd_vcm_all
-
+# Sensitive Function
 save_path = './plot_result_ReducedOrder/figure18_Sensitive_Function.png'
-title = 'Sensitive Function' 
+title = 'Sensitive Function (Reduced Order)' 
 Fr_S_mag_reduce = 20*np.log10(abs(Fr_S_reduce).T)
-
-Fr_S_mag = 20*np.log10(abs(Fr_S).T)
-Sensitive_Function_Plot_Compare(Fr_S_mag_reduce, 
-                                Fr_S_mag, 
-                                f, title, save_path)
+Sensitive_Function_Plot(Fr_S_mag_reduce, f, title, save_path)
 
 plt.show()

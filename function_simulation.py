@@ -8,7 +8,9 @@ import multiprocessing
 import pickle
 import utils
 import plant
-
+import print_ASCII as pa
+# prints ASCII art of the system
+pa.print_system()
 
 def Function_simulation(Sys_Pc_vcm,Sys_Pc_pzt,Sys_Cd_vcm,Sys_Fm_vcm,Sys_Cd_pzt,Sys_Fm_pzt,Ts,Mr_f,iter):
     # Define sim_result as a dictionary
