@@ -10,61 +10,81 @@ An earlier version of PyHDD Benchmark was presented at the **23rd IFAC World Con
 
 Authors: Zidong Liu, Yusen Wan, Richard Lu, Amy Santoso, Xiaohai Hu, Thomas Lee Chu, Tianyu Jiang, Guoxiao Guo, Takenori Atsumi, Xu Chen
 
-## Repository Structure 
+## Repository Structure
 
-    .
-    ├── Data_RRO.txt
-    ├── Fre_Resp.json
-    ├── README.md
-    ├── __pycache__
-    │   ├── Function_simulation.cpython-311.pyc
-    │   ├── Tools.cpython-310.pyc
-    │   ├── data_fm.cpython-311.pyc
-    │   ├── demo.cpython-311.pyc
-    │   ├── plant.cpython-310.pyc
-    │   ├── tools.cpython-311.pyc
-    │   └── utils.cpython-310.pyc
-    ├── demo
-    │   └── README.md
-    ├── function_simulation.py
-    ├── license.txt
-    ├── plant.py
-    ├── plot_control_system.py
-    ├── plot_result
-    │   ├── ... Figures
-    ├── reduce_order_compare.py
-    ├── reduced_order_system.py
-    ├── plot_result_ReducedOrder
-    │   ├── ... Figures
-    │ 
-    ├── requirements.txt
-    ├── simulate_trackfollow.py
-    └── utils.py
+The tree below lists the current top-level files and directories; large figure and cache directories are shown without their contents.
 
-#### Data Files:
-- `Data_RRO.txt`: Stores Repeatable Run-Out (RRO) data for function simulation.
-- `Fre_Resp.json`: Contains frequency response data.
+```text
+.
+├── .gitignore
+├── Data_RRO.txt
+├── Fre_Resp.json
+├── Fre_Resp_reduced.json
+├── Paper/
+│   ├── Figures/
+│   ├── paper.bib
+│   └── paper.md
+├── README.md
+├── RL_config.py
+├── RL_multirate_filter.py
+├── __pycache__/
+├── demo/
+│   └── README.md
+├── function_simulation.py
+├── license.txt
+├── plant.py
+├── plot_control_system.py
+├── plot_result/
+├── plot_result_ReducedOrder/
+├── print_ASCII.py
+├── reduce_order_compare.py
+├── reduced_order_system.py
+├── requirements.txt
+├── requirements_rl.txt
+├── simulate_trackfollow.py
+├── simulation_result/
+│   └── Fre_Resp.json
+├── utils.py
+└── zpetc.py
+```
 
-#### Python Scripts:
-- `function_simulation.py`: Executes HDD simulations based on scenarios defined in `plant.py` and saves the outputs to a designated folder. This process may be time-consuming.
-- `plant.py`: Specifies the dynamics of the plant being simulated.
-- `utils.py`: Includes additional data definitions and utility functions supporting the simulations.
-- `plot_control_system.py`: Visualizes the frequency responses of the control system.
-- `reduce_order_compare.py` includes utility functions supporting the reduced order function of the plant. 
-- `reduce_order_system.py` visualizes the frequency responses of the reduced-order system while comparing them with the 
-- `simulate_trackfollow.py`: Displays simulation outcomes, requiring prior generation of simulation result files.
+### Benchmark and Analysis Scripts
 
-#### Plot Results:
-- The `plot_result` folder houses various figures illustrating the frequency response and other analytical results of the simulations, such as amplitude spectra and Bode plots.
-- The `plot_result_ReducedOrder` folder houses various figures illustrating the frequency responses of the reduced-order system while comparing them with the original control system.
+- `plant.py`: Defines the VCM and PZT actuator models for nine temperature and gain cases.
+- `utils.py`: Provides discrete-time controllers, multi-rate filters, resampling, frequency-response calculations, plotting helpers, and output paths.
+- `function_simulation.py`: Runs the nine time-domain simulation cases and saves `res1.pkl` through `res9.pkl` in `simulation_result/`.
+- `simulate_trackfollow.py`: Loads the simulation results and plots disturbances, head displacement, amplitude spectra, and positioning-error statistics.
+- `plot_control_system.py`: Computes and plots actuator, controller, filter, open-loop, and sensitivity frequency responses.
+- `reduced_order_system.py`: Builds reduced-order actuator models, exports their frequency responses, and compares them with full-order benchmark responses.
+- `reduce_order_compare.py`: Provides plotting helpers for comparing full-order and reduced-order responses.
+- `print_ASCII.py`: Provides the console banner and version-reporting helpers used by the benchmark scripts.
+- `zpetc.py`: Contains an experimental zero-phase error tracking compensator example; its inverse-model derivation is currently a placeholder.
 
-#### Documentation and Other Files:
-- `README.md`: Provides an overview and instructions for utilizing the repository.
-- `license.txt`: Contains the licensing information.
-- `requirements.txt`: Lists the Python package dependencies needed to run the simulations and analyses.
+### Reinforcement Learning Module
 
-#### Cache and Miscellaneous:
-- An additional `README.md` file may be found in the `demo` subdirectory, which explains the parameters, additional data files and system use cases.
+- `RL_multirate_filter.py`: Implements PPO-based notch-filter training, differential-evolution optimization, and optimizer-assisted policy pretraining for the VCM and PZT paths.
+- `RL_config.py`: Defines system, training, notch-filter, performance-target, and reward configurations.
+- `requirements_rl.txt`: Lists dependencies for the RL and optimization workflows, including PyTorch.
+
+### Data and Output Directories
+
+- `Data_RRO.txt`: Contains the repeatable run-out disturbance data used by the simulations.
+- `Fre_Resp.json`: Contains full-order benchmark frequency-response data.
+- `Fre_Resp_reduced.json`: Contains reduced-order frequency-response data and is written by `reduced_order_system.py`.
+- `simulation_result/`: Contains the full-order `Fre_Resp.json` read by the reduced-order comparison and stores generated time-domain simulation results.
+- `plot_result/`: Stores benchmark frequency-response and track-following figures.
+- `plot_result_ReducedOrder/`: Stores reduced-order analysis and comparison figures.
+- `models/`: Created when running the RL workflows to store model checkpoints, optimized parameters, pretraining datasets, and training histories and figures. This generated directory is ignored by Git.
+
+### Documentation and Supporting Files
+
+- `Paper/`: Contains the paper source, bibliography, and figures.
+- `demo/README.md`: Provides additional benchmark parameter and use-case documentation.
+- `README.md`: Provides the project overview, repository guide, and usage instructions.
+- `requirements.txt`: Lists the pinned dependencies for the baseline benchmark.
+- `license.txt`: Contains the project license.
+- `.gitignore`: Defines exclusions for generated results, models, and caches.
+- `__pycache__/`: Contains Python bytecode caches; these files are not needed to understand or run the source code.
 
 # HDD Benchmark Problem Simulation and Analysis
 
@@ -87,7 +107,7 @@ Follow these steps to prepare the environment for running the simulations and an
 1. **Clone the repository:**
    - Download the code package and extract its contents.
       ```bash
-      https://github.com/macs-lab/PyHDDBenchmark.git
+      git clone https://github.com/macs-lab/PyHDDBenchmark.git
       cd PyHDDBenchmark
       ```
 
@@ -97,36 +117,78 @@ Follow these steps to prepare the environment for running the simulations and an
      pip install -r requirements.txt
      ```
 
+   The console banner also imports `packaging`. For the reduced-order workflow, `reduced_order_system.py` imports `hdf5storage`. These packages are not listed in the baseline requirements file and must be available in the environment.
+
+3. **Install RL dependencies (optional):**
+   - To use the notch-filter training and optimization module:
+     ```bash
+     pip install -r requirements_rl.txt
+     ```
+   - The RL requirements use version ranges rather than the pinned baseline versions. A separate environment can be used for RL experiments.
+
 ## Running the Project
 
-To engage with the project's simulation and plotting functionalities, execute the appropriate scripts as follows, depending on your objectives:
+Run the following commands from the repository root so that relative data and output paths resolve correctly.
 
-- **For Plotting Simulation Results:**
-  - Prior execution of the controller simulation is required. Run the following command:
-    ```bash
-    python function_simulation.py
-    ```
-    Please note that the simulation's execution time may vary depending on your hardware specifications. It could take several minutes to complete.
-    Once the simulation has finished running, you can proceed with plotting the results.
+### Time-Domain Simulation and Track-Following Plots
 
-  - To visualize frequency responses, execute:
-    ```bash
-    python plot_control_system.py
-    ```
+First generate the simulation results, then plot them:
 
-  - To compare the frequency responses between the reduced-order plants and the original plants of PZT actuator and VCM, execute:
-    ```bash
-    python reduce_order_system.py
-    ```
+```bash
+python function_simulation.py
+python simulate_trackfollow.py
+```
 
-  - For simulating the controller and visualizing the results, use the command:
-    ```bash
-    python simulate_trackfollow.py
-    ```
+The simulation launches nine cases and may take several minutes. `simulate_trackfollow.py` reads the resulting `simulation_result/res1.pkl` through `res9.pkl` files.
 
-## Simulation Output Directory
+### Frequency-Domain Analysis
 
-Note: All the code execution results, including plots and data files, will be saved in the **`plot_result`** subdirectory and the **`plot_result_ReducedOrder`** subdirectoryby default. If you wish to change the output directory, you can modify the corresponding setting in the `utils.py` file.
+Compute and plot the benchmark frequency responses:
+
+```bash
+python plot_control_system.py
+```
+
+This workflow uses the plant and controller models directly and does not require the time-domain simulation results.
+
+### Reduced-Order Analysis
+
+Compare the reduced-order actuator models with the full-order benchmark:
+
+```bash
+python reduced_order_system.py
+```
+
+The script reads `simulation_result/Fre_Resp.json`, writes `Fre_Resp_reduced.json` in the repository root, and saves figures in `plot_result_ReducedOrder/`.
+
+### RL and Optimization Workflows
+
+After installing `requirements_rl.txt`, train a PPO notch-filter policy:
+
+```bash
+python RL_multirate_filter.py --mode train
+```
+
+Alternatively, optimize notch parameters using differential evolution for the nominal room-temperature case (`c2`), or pretrain a policy using optimizer-generated examples:
+
+```bash
+python RL_multirate_filter.py --mode optimize --plant-case c2
+python RL_multirate_filter.py --mode pretrain
+```
+
+Run `python RL_multirate_filter.py --help` for training limits, optimizer settings, and warm-start options. Configure system and training parameters in `RL_config.py`.
+
+## Output Locations
+
+| Workflow | Output location |
+| --- | --- |
+| Time-domain simulation | `simulation_result/res1.pkl` through `res9.pkl` |
+| Benchmark frequency-response and track-following plots | `plot_result/` |
+| Reduced-order frequency-response data | `Fre_Resp_reduced.json` in the repository root |
+| Reduced-order plots | `plot_result_ReducedOrder/` |
+| RL training, optimization, and pretraining artifacts | `models/` |
+
+The standard plot and simulation-cache paths are defined in `utils.py`. The reduced-order and RL scripts define their own output paths.
 
 ## Key Features
 
